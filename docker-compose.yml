@@ -1,0 +1,21 @@
+version: '3'
+services:
+  1nginx:
+    container_name: 1nginx
+    image: nginx:alpine
+    restart: always
+    expose:
+      - 80
+    volumes:
+      - ./nginx/site1.conf:/etc/nginx/conf.d/site1.conf
+      - ./nginx/html1:/usr/share/nginx/html
+    networks:
+      app-network:
+        ipv4_address: 172.19.0.3
+
+#Docker Networks
+networks:
+  app-network:
+    ipam:
+      config:
+        - subnet: 172.19.0.0/24
